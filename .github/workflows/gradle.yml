@@ -24,6 +24,7 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
   security:
+    needs: build
     runs-on: ubuntu-latest
     env:
       OWASP_DEPCHECK: WbJHgm_pSg-Ujk6Nt3mVdQ
