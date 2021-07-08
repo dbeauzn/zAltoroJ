@@ -26,15 +26,15 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
-      run: ./gradlew build && pwd && ls -la
+      run: ./gradlew build
     - name: OWASP DepCheck
       run: | 
-        docker run -e POLICY_ID=${{ env.OWASP_DEPCHECK }} -v $GITHUB_WORKSPACE:/code -v $GITHUB_WORKSPACE:/results -e LOG_LEVEL=DEBUG -e CYBRIC_API_KEY=${{ secrets.ZN_API_KEY }} zeronorth/integration:latest python cybric.py
+        docker run -e POLICY_ID=${{ env.OWASP_DEPCHECK }} -v $GITHUB_WORKSPACE:/code -v $GITHUB_WORKSPACE:/results -e CYBRIC_API_KEY=${{ secrets.ZN_API_KEY }} zeronorth/integration:latest python cybric.py
     - name: Sonarqube
       run: | 
-        docker run -e POLICY_ID=${{ env.SONARQUBE }} -v $GITHUB_WORKSPACE:/code -v $GITHUB_WORKSPACE:/results -v /var/run/docker.sock:/var/run/docker.sock -e SONAR_JAVA_LIBRARY_DIR=\".\" -e SONAR_JAVA_BINARY_DIR=\".\"  -e LOG_LEVEL=DEBUG -e CYBRIC_API_KEY=${{ secrets.ZN_API_KEY }} zeronorth/integration:latest python cybric.py
+        docker run -e POLICY_ID=${{ env.SONARQUBE }} -v $GITHUB_WORKSPACE:/code -v $GITHUB_WORKSPACE:/results -v /var/run/docker.sock:/var/run/docker.sock -e SONAR_JAVA_LIBRARY_DIR=\".\" -e SONAR_JAVA_BINARY_DIR=\".\" -e CYBRIC_API_KEY=${{ secrets.ZN_API_KEY }} zeronorth/integration:latest python cybric.py
     - name: Veracode
       run: | 
-        ls -la && docker run -e POLICY_ID=${{ env.VERACODE }} -v $GITHUB_WORKSPACE:/code -v $GITHUB_WORKSPACE:/results -e LOG_LEVEL=DEBUG -e CYBRIC_API_KEY=${{ secrets.ZN_API_KEY }} zeronorth/integration:latest python cybric.py
+        docker run -e POLICY_ID=${{ env.VERACODE }} -v $GITHUB_WORKSPACE:/code -v $GITHUB_WORKSPACE:/results -e CYBRIC_API_KEY=${{ secrets.ZN_API_KEY }} zeronorth/integration:latest python cybric.py
 
 
