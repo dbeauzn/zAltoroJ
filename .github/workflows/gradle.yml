@@ -27,6 +27,7 @@ jobs:
       with:
         name: artifact
         if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn` 
+        path: ${{ github.workspace }}
   security:
     needs: build
     runs-on: ubuntu-latest
