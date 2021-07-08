@@ -32,7 +32,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     env:
-      OWASP_DEPCHECK: OQj9tu9rTKS_IdtC0VMNQg
+      OWASP_DEPCHECK: WbJHgm_pSg-Ujk6Nt3mVdQ
       SONARQUBE: I33Mh0P1TwG9HuKHWkC3ug
       VERACODE: AWP_2aS6ShSvBuysivS8gA
     steps:
