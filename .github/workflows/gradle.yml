@@ -31,5 +31,5 @@ jobs:
         docker run -e POLICY_ID=${{ env.OWASP_DEPCHECK }} -v $GITHUB_WORKSPACE:/code -v $GITHUB_WORKSPACE:/results -e LOG_LEVEL=DEBUG -e CYBRIC_API_KEY=${{ secrets.ZN_API_KEY }} zeronorth/integration:latest python cybric.py
     - name: Sonarqube
       run: | 
-        docker run -e POLICY_ID=${{ env.SONARQUBE }} -v $GITHUB_WORKSPACE:/code -v $GITHUB_WORKSPACE:/results INCLUDE_FILES=./*.war -e LOG_LEVEL=DEBUG -e CYBRIC_API_KEY=${{ secrets.ZN_API_KEY }} zeronorth/integration:latest python cybric.py
+        docker run -e POLICY_ID=${{ env.SONARQUBE }} -v $GITHUB_WORKSPACE:/code -v $GITHUB_WORKSPACE:/results INCLUDE_FILES=*.war -e LOG_LEVEL=DEBUG -e CYBRIC_API_KEY=${{ secrets.ZN_API_KEY }} zeronorth/integration:latest python cybric.py
 
