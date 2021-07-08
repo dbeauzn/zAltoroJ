@@ -15,6 +15,7 @@ jobs:
     env:
       OWASP_DEPCHECK: WbJHgm_pSg-Ujk6Nt3mVdQ
       SONARQUBE: I33Mh0P1TwG9HuKHWkC3ug
+      VERACODE: AWP_2aS6ShSvBuysivS8gA
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 11
@@ -32,4 +33,8 @@ jobs:
     - name: Sonarqube
       run: | 
         docker run -e POLICY_ID=${{ env.SONARQUBE }} -v $GITHUB_WORKSPACE:/code -v $GITHUB_WORKSPACE:/results -v /var/run/docker.sock:/var/run/docker.sock -e SONAR_JAVA_LIBRARY_DIR=\".\" -e SONAR_JAVA_BINARY_DIR=\".\"  -e LOG_LEVEL=DEBUG -e CYBRIC_API_KEY=${{ secrets.ZN_API_KEY }} zeronorth/integration:latest python cybric.py
+    - name: Veracode
+      run: | 
+        ls -la && docker run -e POLICY_ID=${{ env.VERACODE }} -v $GITHUB_WORKSPACE:/code -v $GITHUB_WORKSPACE:/results -e LOG_LEVEL=DEBUG -e CYBRIC_API_KEY=${{ secrets.ZN_API_KEY }} zeronorth/integration:latest python cybric.py
+
 
