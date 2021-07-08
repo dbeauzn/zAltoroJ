@@ -12,10 +12,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      OWASP_DEPCHECK: WbJHgm_pSg-Ujk6Nt3mVdQ
-      SONARQUBE: I33Mh0P1TwG9HuKHWkC3ug
-      VERACODE: AWP_2aS6ShSvBuysivS8gA
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 11
@@ -27,6 +23,13 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
+  security:
+    runs-on: ubuntu-latest
+    env:
+      OWASP_DEPCHECK: WbJHgm_pSg-Ujk6Nt3mVdQ
+      SONARQUBE: I33Mh0P1TwG9HuKHWkC3ug
+      VERACODE: AWP_2aS6ShSvBuysivS8gA
+    steps:
     - name: OWASP DepCheck
       run: | 
         docker run -e POLICY_ID=${{ env.OWASP_DEPCHECK }} -v $GITHUB_WORKSPACE:/code -v $GITHUB_WORKSPACE:/results -e CYBRIC_API_KEY=${{ secrets.ZN_API_KEY }} zeronorth/integration:latest python cybric.py
