@@ -23,6 +23,10 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
+    - uses: actions/upload-artifact@v2
+      with:
+        name: artifact
+        if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn` 
   security:
     needs: build
     runs-on: ubuntu-latest
@@ -31,6 +35,9 @@ jobs:
       SONARQUBE: I33Mh0P1TwG9HuKHWkC3ug
       VERACODE: AWP_2aS6ShSvBuysivS8gA
     steps:
+    - uses: actions/download-artifact@v2
+      with:
+        name: artifact
     - name: OWASP DepCheck
       run: | 
         docker run -e POLICY_ID=${{ env.OWASP_DEPCHECK }} -v $GITHUB_WORKSPACE:/code -v $GITHUB_WORKSPACE:/results -e CYBRIC_API_KEY=${{ secrets.ZN_API_KEY }} zeronorth/integration:latest python cybric.py
