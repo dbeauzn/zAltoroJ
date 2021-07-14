@@ -31,7 +31,7 @@ jobs:
         FAIL_ON: 0 # 0, CRITICAL, HIGH, MEDIUM, LOW, INFO
                          # Defaults to 0 which is disregard all issue criticality
       run: |
-        for scenario in $SCENARIOS; do docker run -e SCENARIO=$scenario -e POLICY_NAME=${{github.event.repository}}:$scenario -e TARGET_NAME=${{github.event.repository.name}} -e FAIL_ON_HIGH_SEVERITY=$FAIL_ON -e STAGE=build -e WAIT_FOR_COMPLETION=$WAIT -v $GITHUB_WORKSPACE:/code -v $GITHUB_WORKSPACE:/results -v /var/run/docker.sock:/var/run/docker.sock -e SONAR_JAVA_LIBRARY_DIR=\".\" -e SONAR_JAVA_BINARY_DIR=\".\" -e CYBRIC_API_KEY=${{secrets.ZN_API_KEY}} zeronorth/integration:latest python cybric.py; done
+        for scenario in $SCENARIOS; do docker run -e SCENARIO=$scenario -e POLICY_NAME=${{GITHUB_REPOSITORY}}:$scenario -e TARGET_NAME=${{github.event.repository.name}} -e FAIL_ON_HIGH_SEVERITY=$FAIL_ON -e STAGE=build -e WAIT_FOR_COMPLETION=$WAIT -v $GITHUB_WORKSPACE:/code -v $GITHUB_WORKSPACE:/results -v /var/run/docker.sock:/var/run/docker.sock -e SONAR_JAVA_LIBRARY_DIR=\".\" -e SONAR_JAVA_BINARY_DIR=\".\" -e CYBRIC_API_KEY=${{secrets.ZN_API_KEY}} zeronorth/integration:latest python cybric.py; done
 #     - uses: actions/upload-artifact@v2
 #       with:
 #         name: artifact
