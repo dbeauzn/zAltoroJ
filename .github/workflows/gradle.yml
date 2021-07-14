@@ -26,7 +26,7 @@ jobs:
 #     Loops through specified scenarios. Ensure scenearios does not have spaces.Set secret.ZN_API_KEY prior to initiating. 
     - name: ZeroNorth Security
       env:       
-        SCENARIOS: bandit sonarqube owaspv5
+        SCENARIOS: veracode sonarqube owaspv5
         WAIT: false # true, false. Must be set to true if gating
         FAIL_ON: 0 # 0, CRITICAL, HIGH, MEDIUM, LOW, INFO
                          # Defaults to 0 which is disregard all issue criticality
